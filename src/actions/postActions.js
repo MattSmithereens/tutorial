@@ -7,8 +7,25 @@ export const fetchPosts = () => dispatch => {
     dispatch({
       type:FETCH_POSTS,
       payload: posts
-    }))
-}
+    })
+  );
+};
+
+export const createPost = (postData) => dispatch => {
+  fetch('http://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    headers: {
+      'conntent-type': 'application/json'
+    },
+    body: JSON.stringify(postData)
+  })
+  .then(res => res.json())
+  .then(post => dispatch({
+    type: NEW_POST,
+    payload: post
+
+  }));
+};
 
 // pre es6 way to do this:
 // export function fetchPosts() {
